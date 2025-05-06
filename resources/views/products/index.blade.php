@@ -6,26 +6,28 @@
 
         <!-- Divider -->
         <div class="divider my-6"></div>
+
         <!-- Tabel Grid -->
         <div class="grid grid-cols-12 gap-4">
             <a href="{{ route('products.create') }}"
                 class="btn btn-soft btn-success btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl col-start-2 col-span-2">Tambah
                 Barang</a>
+
             <!-- Form Bulk Delete -->
             <div class="col-start-2 col-span-10">
                 <form id="bulkDeleteForm" action="{{ route('products.bulk-delete') }}" method="POST"
-                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang-barang yang dipilih?')">
+                    onsubmit="return false;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-soft btn-error col-span-2">Hapus
+                    <button type="button" class="btn btn-soft btn-error col-span-2" onclick="confirmBulkDelete()">Hapus
                         Terpilih</button>
                 </form>
-                <div class="overflow-x-auto bg-base-100 shadow-lg rounded-xl p-4">
+
+                <div class="overflow-x-auto bg-base-100 shadow-lg rounded-xl p-4 mt-4">
                     <table id="produkTable" class="table table-zebra w-full">
-                        <!-- head -->
                         <thead>
                             <tr class="text-primary">
-                                <th><input type="checkbox" id="selectAll"></th> <!-- checkbox master -->
+                                <th><input type="checkbox" id="selectAll"></th>
                                 <th>No</th>
                                 <th>Nama Barang</th>
                                 <th>Jenis Barang</th>
@@ -42,9 +44,7 @@
                                         <input type="checkbox" name="ids[]" value="{{ $product->id }}"
                                             form="bulkDeleteForm">
                                     </td>
-                                    <th class="text-center text-primary font-bold">
-                                        {{ $index + 1 }}
-                                    </th>
+                                    <th class="text-center text-primary font-bold">{{ $index + 1 }}</th>
                                     <td>{{ $product->nama_barang }}</td>
                                     <td>{{ $product->jenis_barang }}</td>
                                     <td>{{ 'Rp ' . number_format($product->harga_pcs, 2, ',', '.') }}</td>
@@ -52,13 +52,14 @@
                                     <td><img src="{{ $product->foto_barang }}" alt="Produk" style="width: 150px"
                                             class="rounded-lg"></td>
                                     <td>
-                                        <form onsubmit="return confirm('Apakah anda yakin!');"
+                                        <form id="deleteForm-{{ $product->id }}"
                                             action="{{ route('products.destroy', $product->id) }}" method="POST">
                                             <a href="{{ route('products.edit', $product->id) }}"
                                                 class="btn btn-soft btn-info">Edit</a>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-soft btn-error">Hapus</button>
+                                            <button type="button" class="btn btn-soft btn-error"
+                                                onclick="confirmDelete('{{ $product->id }}')">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -70,7 +71,12 @@
         </div>
     </div>
 
-
+    <!-- SweetAlert2 CDN -->
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- DataTable -->
     <script>
         $(document).ready(function() {
             $('#produkTable').DataTable({
@@ -87,10 +93,69 @@
                     zeroRecords: "Tidak ada data yang tersedia",
                 }
             });
-        });
-        $('#selectAll').on('click', function() {
-            $('input[name="ids[]"]').prop('checked', this.checked);
-        });
-    </script>
 
+            $('#selectAll').on('click', function() {
+                $('input[name="ids[]"]').prop('checked', this.checked);
+            });
+        });
+
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Yakin ingin menghapus?',
+                text: "Data tidak bisa dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm-' + id).submit();
+                }
+            });
+        }
+
+        function confirmBulkDelete() {
+            if ($('input[name="ids[]"]:checked').length === 0) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Tidak ada item',
+                    text: 'Silakan pilih data yang ingin dihapus.'
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: 'Yakin ingin menghapus?',
+                text: "Beberapa barang akan dihapus!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('bulkDeleteForm').submit();
+                }
+            });
+        }
+
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+                confirmButtonColor: '#22c55e'
+            });
+        @elseif (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: '{{ session('error') }}',
+                confirmButtonColor: '#ef4444'
+            });
+        @endif
+    </script>
 </x-layout>
