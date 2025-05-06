@@ -43,7 +43,7 @@
                                             form="bulkDeleteForm">
                                     </td>
                                     <th class="text-center text-primary font-bold">
-                                        {{ $loop->iteration + ($products->currentPage() - 1) * $products->perPage() }}
+                                        {{ $index + 1 }}
                                     </th>
                                     <td>{{ $product->nama_barang }}</td>
                                     <td>{{ $product->jenis_barang }}</td>
@@ -54,7 +54,8 @@
                                     <td>
                                         <form onsubmit="return confirm('Apakah anda yakin!');"
                                             action="{{ route('products.destroy', $product->id) }}" method="POST">
-                                            <button class="btn btn-soft btn-info">Edit</button>
+                                            <a href="{{ route('products.edit', $product->id) }}"
+                                                class="btn btn-soft btn-info">Edit</a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-soft btn-error">Hapus</button>

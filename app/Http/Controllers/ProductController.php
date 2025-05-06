@@ -13,7 +13,7 @@ class ProductController extends Controller
     //
     public function index(): View
     {
-        $products = Product::latest()->paginate();
+        $products = Product::latest()->get();
         return view('products.index', compact('products'));
     }
 
@@ -40,6 +40,34 @@ class ProductController extends Controller
             'foto_barang' => $request->foto_barang,
         ]);
         return Redirect::route('products.index')->with('success', 'Barang berhasil ditambah');
+    }
+
+    public function edit(string $id): view
+    {
+        $product = Product::findOrFail($id);
+        return view('products.edit', compact('product'));
+    }
+
+    public function update(Request $request, $id): RedirectResponse
+    {
+        $request->validate([
+            'nama_barang' => 'required|string|max:255',
+            'jenis_barang' => 'nullable|in:Makanan,Minuman,Bumbu,Obat-obatan,Sabun,Lainnya',
+            'harga_pcs' => 'nullable|numeric',
+            'harga_2pcs' => 'nullable|numeric',
+            'foto_barang' => 'nullable|url',
+        ]);
+
+        $product = Product::findOrFail($id);
+
+        $product->update([
+            'nama_barang' => $request->nama_barang,
+            'harga_pcs' => $request->harga_pcs,
+            'harga_2pcs' => $request->harga_2pcs,
+            'jenis_barang' => $request->jenis_barang,
+            'foto_barang' => $request->foto_barang,
+        ]);
+        return Redirect::route('products.index')->with('success', 'Barang berhasil diupdate');
     }
 
     public function destroy($id): RedirectResponse

@@ -2,7 +2,7 @@
     <div class="max-w-2xl mx-auto bg-base-100 p-6 shadow-lg rounded-xl">
         <h2 class="text-2xl font-bold text-primary mb-4">Form Tambah Produk</h2>
 
-        <form action="{{ route('products.store') }}" method="POST">
+        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <!-- Nama Barang -->
