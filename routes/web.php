@@ -17,6 +17,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::delete('/products/bulk-delete', [ProductController::class, 'bulkDelete'])->name('products.bulk-delete');
+    Route::get('/products/trash', [ProductController::class, 'trash'])->name('products.trash');
+    Route::get('/products/restore/{id}', [ProductController::class, 'restore'])->name('products.restore');
+    Route::delete('/products/force-delete/{id}', [ProductController::class, 'forceDelete'])->name('products.forceDelete');
+
     Route::resource('products', ProductController::class);
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 });

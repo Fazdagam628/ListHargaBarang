@@ -16,6 +16,7 @@ class Product extends Model
         'harga_pcs',
         'harga_2pcs',
         'jenis_barang',
-        'foto_barang'
+        'foto_barang',
+        'deleted_at'
     ];
 }

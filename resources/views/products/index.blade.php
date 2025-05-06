@@ -9,20 +9,23 @@
 
         <!-- Tabel Grid -->
         <div class="grid grid-cols-12 gap-4">
-            <a href="{{ route('products.create') }}" class="btn dark:btn-soft btn-success col-start-2 col-span-2">Tambah
-                Barang</a>
 
             <!-- Form Bulk Delete -->
             <div class="col-start-2 col-span-10">
+                <a href="{{ route('products.create') }}" class="btn dark:btn-soft btn-success col-span-2 my-2">Tambah
+                    Barang</a>
                 <form id="bulkDeleteForm" action="{{ route('products.bulk-delete') }}" method="POST"
                     onsubmit="return false;">
                     @csrf
                     @method('DELETE')
-                    <button type="button" class="btn dark:btn-soft btn-error col-span-2"
+                    <button type="button" class="btn dark:btn-soft btn-error col-span-2 my-2"
                         onclick="confirmBulkDelete()">Hapus
                         Terpilih</button>
                 </form>
 
+                <div class="col-start-2 col-span-10">
+                    <a href="{{ route('products.trash') }}" class="btn btn-primary my-2">Restore Data</a>
+                </div>
                 <div class="overflow-x-auto bg-base-100 shadow-lg rounded-xl p-4 mt-4">
                     <table id="produkTable" class="table table-zebra w-full">
                         <thead>

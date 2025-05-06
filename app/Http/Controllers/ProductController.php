@@ -89,4 +89,30 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Beberapa produk berhasil dihapus.');
     }
+
+    // Menampilkan produk yang sudah dihapus
+    public function trash(): View
+    {
+        $products = Product::onlyTrashed()->latest()->get();
+        return view('products.trash', compact('products'));
+    }
+
+    // Mengembalikan produk yang sudah dihapus
+    public function restore($id): RedirectResponse
+    {
+        $product = Product::withTrashed()->findOrFail($id);
+        $product->restore();
+
+        return redirect()->route('products.trash')->with('success', 'Produk berhasil dikembalikan.');
+    }
+
+    // Menghapus secara permanen
+    public function forceDelete($id): RedirectResponse
+    {
+        $product = Product::withTrashed()->findOrFail($id);
+        $product->forceDelete();
+
+        return redirect()->route('products.trash')->with(['success' => 'Data produk berhasil dihapus permanen.']);
+        // return redirect()->route('products.trash')->with('success', 'Produk berhasil dihapus permanen.');
+    }
 }
