@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <!-- jQuery (dibutuhkan oleh DataTables) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
+    {{-- @vite('resources/css/app.css') --}}
 </head>
 
 <body class="bg-base-200 min-h-screen font-sans">
