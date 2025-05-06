@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
+import { inject } from "@vercel/analytics";
 // import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
