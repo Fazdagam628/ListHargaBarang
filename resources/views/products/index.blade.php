@@ -9,8 +9,7 @@
 
         <!-- Tabel Grid -->
         <div class="grid grid-cols-12 gap-4">
-            <a href="{{ route('products.create') }}"
-                class="btn btn-soft btn-success btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl col-start-2 col-span-2">Tambah
+            <a href="{{ route('products.create') }}" class="btn dark:btn-soft btn-success col-start-2 col-span-2">Tambah
                 Barang</a>
 
             <!-- Form Bulk Delete -->
@@ -19,7 +18,8 @@
                     onsubmit="return false;">
                     @csrf
                     @method('DELETE')
-                    <button type="button" class="btn btn-soft btn-error col-span-2" onclick="confirmBulkDelete()">Hapus
+                    <button type="button" class="btn dark:btn-soft btn-error col-span-2"
+                        onclick="confirmBulkDelete()">Hapus
                         Terpilih</button>
                 </form>
 
@@ -48,17 +48,17 @@
                                     <td>{{ $product->nama_barang }}</td>
                                     <td>{{ $product->jenis_barang }}</td>
                                     <td>{{ 'Rp ' . number_format($product->harga_pcs, 2, ',', '.') }}</td>
-                                    <td>{{ $product->harga_2pcs }}</td>
+                                    <td>{{ 'Rp ' . number_format($product->harga_2pcs, 2, ',', '.') }}</td>
                                     <td><img src="{{ $product->foto_barang }}" alt="Produk" style="width: 150px"
                                             class="rounded-lg"></td>
                                     <td>
                                         <form id="deleteForm-{{ $product->id }}"
                                             action="{{ route('products.destroy', $product->id) }}" method="POST">
                                             <a href="{{ route('products.edit', $product->id) }}"
-                                                class="btn btn-soft btn-info">Edit</a>
+                                                class="btn dark:btn-soft btn-info">Edit</a>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" class="btn btn-soft btn-error"
+                                            <button type="button" class="btn dark:btn-soft btn-error"
                                                 onclick="confirmDelete('{{ $product->id }}')">Hapus</button>
                                         </form>
                                     </td>
