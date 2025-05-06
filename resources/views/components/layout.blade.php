@@ -15,8 +15,8 @@
 </head>
 
 <body class="bg-base-200 min-h-screen font-sans">
-    <a role="button" class="btn btn-neutral" href="/dashboard">Dashboard</a>
     <x-theme-toggle></x-theme-toggle>
+    <a role="button" class="btn btn-neutral" href="/dashboard">Dashboard</a>
     {{ $slot }}
     <!-- DataTables JS + CSS -->
 </body>
