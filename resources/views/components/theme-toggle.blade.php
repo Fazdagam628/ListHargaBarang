@@ -1,5 +1,5 @@
 <!-- Theme Toggle -->
-<div class="flex justify-end mb-4">
+<div class="flex justify-between mb-4">
     <a role="button" class="btn btn-neutral" href="/dashboard">Dashboard</a>
     <label class="swap swap-rotate">
         <input type="checkbox" class="theme-controller" value="synthwave" />
