@@ -2,7 +2,7 @@
     <div class="container mx-auto px-4 py-8">
         <!-- Judul -->
         <h1 class="text-3xl font-bold text-center text-primary mb-2">Daftar Barang</h1>
-        <p class="text-center text-gray-500 mb-6">GRIYA ASTUTI</p>
+        <p class="text-center text-gray-500 mb-6">List Harga Barang</p>
 
         <!-- Divider -->
         <div class="divider my-6"></div>
