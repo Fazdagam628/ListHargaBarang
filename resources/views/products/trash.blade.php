@@ -1,7 +1,7 @@
 <x-layout>
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold text-center text-error mb-2">Tempat Sampah Produk</h1>
-        <p class="text-center text-gray-500 mb-6">Produk yang dihapus secara soft</p>
+        <p class="text-center text-gray-500 mb-6">Data produk yang terhapus dapat direstore kembali</p>
 
         <!-- Divider -->
         <div class="divider my-6"></div>
