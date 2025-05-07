@@ -70,6 +70,7 @@
                 </button>
             </div>
         </div>
+        <x-theme-toggle></x-theme-toggle>
     </div>
 
     <!-- Responsive Navigation Menu -->
@@ -105,6 +106,5 @@
             </div>
         </div>
     </div>
-    <x-theme-toggle></x-theme-toggle>
 
 </nav>
