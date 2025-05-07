@@ -15,7 +15,8 @@
 </head>
 
 <body class="bg-base-200 min-h-screen font-sans">
-    <x-theme-toggle></x-theme-toggle>
+    @include('layouts.navigation')
+
     {{ $slot }}
     <!-- DataTables JS + CSS -->
 </body>
