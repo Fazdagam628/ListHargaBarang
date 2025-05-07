@@ -105,7 +105,7 @@
         function confirmDelete(id) {
             Swal.fire({
                 title: 'Yakin ingin menghapus?',
-                text: "Data tidak bisa dikembalikan!",
+                text: "Data yang terhapus dapat direstore!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
