@@ -14,8 +14,8 @@
             <div class="col-start-2 col-span-10">
                 <a href="{{ route('products.create') }}" class="btn dark:btn-soft btn-success col-span-2 my-2">Tambah
                     Barang</a>
-                <form id="bulkDeleteForm" action="https://list-harga-barang.vercel.app{{ route('products.bulk-delete') }}"
-                    method="POST" onsubmit="return false;">
+                <form id="bulkDeleteForm" action="{{ route('products.bulk-delete') }}" method="POST"
+                    onsubmit="return false;">
                     @csrf
                     @method('DELETE')
                     <button type="button" class="btn dark:btn-soft btn-error col-span-2 my-2"
