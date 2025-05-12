@@ -14,8 +14,8 @@
             <div class="col-start-2 col-span-10">
                 <a href="{{ route('products.create') }}" class="btn dark:btn-soft btn-success col-span-2 my-2">Tambah
                     Barang</a>
-                <form id="bulkDeleteForm" action="{{ route('products.bulk-delete') }}" method="POST"
-                    onsubmit="return false;">
+                <form id="bulkDeleteForm" action="https://list-harga-barang.vercel.app{{ route('products.bulk-delete') }}"
+                    method="POST" onsubmit="return false;">
                     @csrf
                     @method('DELETE')
                     <button type="button" class="btn dark:btn-soft btn-error col-span-2 my-2"
@@ -78,6 +78,7 @@
     {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- DataTable -->
     <script>
