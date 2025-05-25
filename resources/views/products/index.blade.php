@@ -82,6 +82,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- DataTable -->
     <script>
+        window.va = window.va || function() {
+            (window.vaq = window.vaq || []).push(arguments);
+        };
         $(document).ready(function() {
             $('#produkTable').DataTable({
                 language: {
@@ -162,4 +165,5 @@
             });
         @endif
     </script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </x-layout>
